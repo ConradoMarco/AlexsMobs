@@ -12,11 +12,10 @@ import net.minecraft.world.item.ItemStack;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 
-
 @OnlyIn(Dist.CLIENT)
 public class GUIAnimalDictionary extends GuiBasicBook {
 
-    private static final ResourceLocation ROOT = ResourceLocation.parse("alexsmobs:book/animal_dictionary/root.json");
+    private static final ResourceLocation ROOT = ResourceLocation.fromNamespaceAndPath("alexsmobs", "book/animal_dictionary/root.json");
 
     public GUIAnimalDictionary(ItemStack bookStack) {
         super(bookStack, Component.translatable("animal_dictionary.title"));
@@ -27,6 +26,7 @@ public class GUIAnimalDictionary extends GuiBasicBook {
         this.currentPageJSON = this.getTextFileDirectory().withSuffix(page + ".json");
     }
 
+    @Override
     public void render(GuiGraphics guiGraphics, int x, int y, float partialTicks) {
         RenderLaviathan.renderWithoutShaking = true;
         ModelLaviathan.renderStaticInBook = true;
@@ -39,15 +39,18 @@ public class GUIAnimalDictionary extends GuiBasicBook {
         RenderUnderminer.renderWithPickaxe = false;
     }
 
+    @Override
     protected int getBindingColor() {
         return 0X606B26;
     }
 
+    @Override
     public ResourceLocation getRootPage() {
         return ROOT;
     }
 
+    @Override
     public ResourceLocation getTextFileDirectory() {
-        return ResourceLocation.parse("alexsmobs:book/animal_dictionary/");
+        return ResourceLocation.fromNamespaceAndPath("alexsmobs", "book/animal_dictionary/");
     }
 }
